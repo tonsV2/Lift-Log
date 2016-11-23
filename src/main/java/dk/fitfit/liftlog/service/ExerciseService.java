@@ -1,9 +1,7 @@
 package dk.fitfit.liftlog.service;
 
 import dk.fitfit.liftlog.domain.Exercise;
-import dk.fitfit.liftlog.domain.Set;
 import dk.fitfit.liftlog.repository.ExerciseRepository;
-import dk.fitfit.liftlog.repository.SetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

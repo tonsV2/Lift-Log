@@ -1,40 +1,37 @@
 package dk.fitfit.liftlog.controller;
 
 import dk.fitfit.liftlog.domain.Exercise;
-import dk.fitfit.liftlog.domain.Set;
+import dk.fitfit.liftlog.domain.WorkoutSet;
 import dk.fitfit.liftlog.domain.User;
 import dk.fitfit.liftlog.service.ExerciseService;
-import dk.fitfit.liftlog.service.SetService;
+import dk.fitfit.liftlog.service.WorkoutSetService;
 import dk.fitfit.liftlog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+
 @RestController
 public class HelloWorld {
-	private final SetService setService;
+	private final WorkoutSetService workoutSetService;
 	private final ExerciseService exerciseService;
 	private final UserService userService;
 
 	@Autowired
-	public HelloWorld(SetService setService, ExerciseService exerciseService, UserService userService) {
-		this.setService = setService;
+	public HelloWorld(WorkoutSetService workoutSetService, ExerciseService exerciseService, UserService userService) {
+		this.workoutSetService = workoutSetService;
 		this.exerciseService = exerciseService;
 		this.userService = userService;
 	}
 
-	@GetMapping("/hello")
-	public String hello() {
-		return "Hello world!";
-	}
-
 	@GetMapping("/sets")
-	public Iterable<Set> sets() {
-		return setService.findAll();
+	public Iterable<WorkoutSet> sets() {
+		return workoutSetService.findAll();
 	}
 
 	@GetMapping("/init")
-	public Iterable<Set> init() {
+	public Iterable<WorkoutSet> init() {
 		User user = new User("tons", "tons@tons.dk");
 		userService.save(user);
 
@@ -43,14 +40,20 @@ public class HelloWorld {
 		Exercise squat = new Exercise("Squat", "Never skip leg day!");
 		exerciseService.save(squat);
 
-		Set set = new Set();
-		set.setRepetition(10);
-		set.setWight(70D);
+		WorkoutSet workoutSet = new WorkoutSet();
+		workoutSet.setRepetition(10);
+		workoutSet.setWight(70D);
 
-		setService.log(user, bp, set);
-		setService.log(user, squat, 8, 70D);
+		workoutSetService.log(user, bp, 10, 70D, LocalDateTime.now().minusDays(1));
+		workoutSetService.log(user, squat, 8, 70D, LocalDateTime.now().minusDays(1));
 
-		return setService.findAll();
+		workoutSetService.log(user, bp, workoutSet);
+		workoutSetService.log(user, squat, 8, 70D);
+
+		workoutSetService.log(user, bp, 10, 70D, LocalDateTime.now().plusDays(1));
+		workoutSetService.log(user, squat, 8, 70D, LocalDateTime.now().plusDays(1));
+
+		return workoutSetService.findAll();
 	}
 
 }

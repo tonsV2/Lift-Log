@@ -16,7 +16,7 @@ public class User {
 	private String name;
 	private String email;
 	@OneToMany
-	private List<Set> sets;
+	private List<WorkoutSet> workoutSets;
 
 	public User() {
 	}

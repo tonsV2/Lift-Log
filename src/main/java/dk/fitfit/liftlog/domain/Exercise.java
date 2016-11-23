@@ -16,7 +16,7 @@ public class Exercise {
 	private String name;
 	private String description;
 	@OneToMany
-	private List<Set> sets;
+	private List<WorkoutSet> workoutSets;
 
 	public Exercise() {
 	}
