@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -16,7 +16,7 @@ public class Exercise {
 	private String name;
 	private String description;
 	@OneToMany
-	private List<WorkoutSet> workoutSets;
+	private Set<WorkoutSet> workoutSets;
 
 	public Exercise() {
 	}
