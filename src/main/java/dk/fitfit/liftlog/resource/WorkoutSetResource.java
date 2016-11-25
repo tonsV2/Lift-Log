@@ -1,33 +1,17 @@
-package dk.fitfit.liftlog.domain;
+package dk.fitfit.liftlog.resource;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+
 import java.time.LocalDateTime;
 
-@Entity
-public class WorkoutSet implements FirstClassDomainObject {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+public class WorkoutSetResource {
 	private int repetition;
 	private double wight;
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	private LocalDateTime timestamp;
-	@ManyToOne
-	private Exercise exercise;
-	@ManyToOne
-	private User user;
-
-	public WorkoutSet() {
-		this.timestamp = LocalDateTime.now();
-	}
-
-	@Override
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
+	private ExerciseResource exercise;
+	private UserResource user;
 
 	public int getRepetition() {
 		return repetition;
@@ -53,19 +37,19 @@ public class WorkoutSet implements FirstClassDomainObject {
 		this.timestamp = timestamp;
 	}
 
-	public Exercise getExercise() {
+	public ExerciseResource getExercise() {
 		return exercise;
 	}
 
-	public void setExercise(Exercise exercise) {
+	public void setExercise(ExerciseResource exercise) {
 		this.exercise = exercise;
 	}
 
-	public User getUser() {
+	public UserResource getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(UserResource user) {
 		this.user = user;
 	}
 }

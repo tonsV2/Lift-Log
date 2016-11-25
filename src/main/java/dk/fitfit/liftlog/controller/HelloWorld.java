@@ -3,10 +3,14 @@ package dk.fitfit.liftlog.controller;
 import dk.fitfit.liftlog.domain.Exercise;
 import dk.fitfit.liftlog.domain.WorkoutSet;
 import dk.fitfit.liftlog.domain.User;
+import dk.fitfit.liftlog.resource.UserResource;
+import dk.fitfit.liftlog.resource.mapper.MapperService;
+import dk.fitfit.liftlog.resource.mapper.ToResource;
 import dk.fitfit.liftlog.service.ExerciseService;
 import dk.fitfit.liftlog.service.WorkoutSetService;
 import dk.fitfit.liftlog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.ResourceSupport;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,12 +21,22 @@ public class HelloWorld {
 	private final WorkoutSetService workoutSetService;
 	private final ExerciseService exerciseService;
 	private final UserService userService;
+	private final MapperService mapperService;
 
 	@Autowired
-	public HelloWorld(WorkoutSetService workoutSetService, ExerciseService exerciseService, UserService userService) {
+	public HelloWorld(WorkoutSetService workoutSetService, ExerciseService exerciseService, UserService userService, MapperService mapperService) {
 		this.workoutSetService = workoutSetService;
 		this.exerciseService = exerciseService;
 		this.userService = userService;
+		this.mapperService = mapperService;
+	}
+
+	@GetMapping("/users")
+	public ResourceSupport users() {
+		Iterable<User> users = userService.findAll();
+		User user = users.iterator().next();
+		ToResource<User, UserResource> mapper = mapperService.getMapper(User.class);
+		return mapper.toResource(user);
 	}
 
 	@GetMapping("/sets")

@@ -1,15 +1,10 @@
 package dk.fitfit.liftlog.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.util.Set;
 
-@Getter
-@Setter
 @Entity
-public class Exercise {
+public class Exercise implements FirstClassDomainObject {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -24,5 +19,38 @@ public class Exercise {
 	public Exercise(String name, String description) {
 		this.name = name;
 		this.description = description;
+	}
+
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Set<WorkoutSet> getWorkoutSets() {
+		return workoutSets;
+	}
+
+	public void setWorkoutSets(Set<WorkoutSet> workoutSets) {
+		this.workoutSets = workoutSets;
 	}
 }
