@@ -1,16 +1,14 @@
 package dk.fitfit.liftlog.controller;
 
 import dk.fitfit.liftlog.domain.Exercise;
-import dk.fitfit.liftlog.domain.WorkoutSet;
 import dk.fitfit.liftlog.domain.User;
+import dk.fitfit.liftlog.domain.WorkoutSet;
 import dk.fitfit.liftlog.resource.UserResource;
 import dk.fitfit.liftlog.resource.mapper.MapperService;
-import dk.fitfit.liftlog.resource.mapper.ToResource;
 import dk.fitfit.liftlog.service.ExerciseService;
-import dk.fitfit.liftlog.service.WorkoutSetService;
 import dk.fitfit.liftlog.service.UserService;
+import dk.fitfit.liftlog.service.WorkoutSetService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.ResourceSupport;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,12 +31,9 @@ public class HelloWorld {
 	}
 
 	@GetMapping("/users")
-	public UserResource users() {
-		// TODO: Fix this! Implement ToResource.toResources
+	public Iterable<UserResource> users() {
 		Iterable<User> users = userService.findAll();
-		User user = users.iterator().next();
-		ToResource<User, UserResource> mapper = mapperService.getMapper(User.class);
-		return mapper.toResource(user);
+		return mapperService.map(users);
 	}
 
 	@GetMapping("/users/{id}")

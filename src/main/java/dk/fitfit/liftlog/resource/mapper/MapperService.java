@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,5 +30,13 @@ public class MapperService {
 	public <D extends FirstClassDomainObject, R extends ResourceSupport> R map(D domainObject) {
 		ToResource<D, R> mapper = getMapper((Class<D>) domainObject.getClass());
 		return mapper.toResource(domainObject);
+	}
+
+	public <D extends FirstClassDomainObject, R extends ResourceSupport> Iterable<R> map(Iterable<D> domainObjects) {
+		List<R> resources = new ArrayList<>();
+		for (D domainObject : domainObjects) {
+			resources.add(map(domainObject));
+		}
+		return resources;
 	}
 }
