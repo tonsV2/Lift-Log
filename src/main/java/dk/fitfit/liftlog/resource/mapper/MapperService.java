@@ -29,7 +29,7 @@ public class MapperService {
 	@SuppressWarnings("unchecked")
 	public <D extends FirstClassDomainObject, R extends ResourceSupport> R map(D domainObject) {
 		ToResource<D, R> mapper = getMapper((Class<D>) domainObject.getClass());
-		return mapper.toResource(domainObject);
+		return mapper.map(domainObject);
 	}
 
 	public <D extends FirstClassDomainObject, R extends ResourceSupport> Iterable<R> map(Iterable<D> domainObjects) {
