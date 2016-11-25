@@ -12,6 +12,7 @@ import dk.fitfit.liftlog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -32,11 +33,18 @@ public class HelloWorld {
 	}
 
 	@GetMapping("/users")
-	public ResourceSupport users() {
+	public UserResource users() {
+		// TODO: Fix this! Implement ToResource.toResources
 		Iterable<User> users = userService.findAll();
 		User user = users.iterator().next();
 		ToResource<User, UserResource> mapper = mapperService.getMapper(User.class);
 		return mapper.toResource(user);
+	}
+
+	@GetMapping("/users/{id}")
+	public UserResource user(@PathVariable long id) {
+		User user = userService.findOne(id);
+		return mapperService.map(user);
 	}
 
 	@GetMapping("/sets")

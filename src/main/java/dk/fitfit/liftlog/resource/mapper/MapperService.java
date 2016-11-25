@@ -24,4 +24,10 @@ public class MapperService {
 	public <D extends FirstClassDomainObject, R extends ResourceSupport> ToResource<D, R> getMapper(Class<D> domainObjectClass) {
 		return (ToResource<D, R>) mappers.get(domainObjectClass);
 	}
+
+	@SuppressWarnings("unchecked")
+	public <D extends FirstClassDomainObject, R extends ResourceSupport> R map(D domainObject) {
+		ToResource<D, R> mapper = getMapper((Class<D>) domainObject.getClass());
+		return mapper.toResource(domainObject);
+	}
 }
