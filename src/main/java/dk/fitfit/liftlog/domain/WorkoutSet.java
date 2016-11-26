@@ -68,5 +68,4 @@ public class WorkoutSet implements FirstClassDomainObject {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
 }
