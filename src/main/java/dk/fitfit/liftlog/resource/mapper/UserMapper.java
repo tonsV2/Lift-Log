@@ -1,5 +1,6 @@
 package dk.fitfit.liftlog.resource.mapper;
 
+import com.google.common.collect.Lists;
 import dk.fitfit.liftlog.domain.User;
 import dk.fitfit.liftlog.resource.UserResource;
 import org.mapstruct.Mapper;
@@ -11,9 +12,6 @@ import java.util.List;
 abstract class UserMapper implements ToResource<User, UserResource> {
 	@Override
 	public List<Class<?>> getSupportedClasses() {
-		List<Class<?>> classes = new ArrayList<>();
-		classes.add(User.class);
-		classes.add(UserResource.class);
-		return classes;
+		return Lists.newArrayList(User.class, UserResource.class);
 	}
 }
