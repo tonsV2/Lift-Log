@@ -15,7 +15,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 interface ExerciseMapper extends ClassMapper<Exercise, ExerciseResource> {
 	@Override
-	@Mapping(target = "workoutSets", ignore = true)
+//	@Mapping(target = "workoutSets", ignore = true)
 	Exercise map(ExerciseResource resource);
 
 	@Override

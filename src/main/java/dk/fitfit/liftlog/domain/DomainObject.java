@@ -1,5 +1,5 @@
 package dk.fitfit.liftlog.domain;
 
-public interface FirstClassDomainObject {
+public interface DomainObject {
 	Long getId();
 }

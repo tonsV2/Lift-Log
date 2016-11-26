@@ -13,10 +13,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", uses = {UserMapper.class, WorkoutSetMapper.class})
 interface WorkoutSetMapper extends ClassMapper<WorkoutSet, WorkoutSetResource> {
+/*
 	@Override
 	@Mappings({
-			@Mapping(target = "user", ignore = true),
-			@Mapping(target = "exercise", ignore = true)
+				@Mapping(target = "user", ignore = true),
+				@Mapping(target = "exercise", ignore = true)
 	})
 	WorkoutSet map(WorkoutSetResource resource);
 
@@ -26,7 +27,7 @@ interface WorkoutSetMapper extends ClassMapper<WorkoutSet, WorkoutSetResource> {
 			@Mapping(target = "exercise", ignore = true)
 	})
 	WorkoutSetResource map(WorkoutSet resource);
-
+*/
 	@Override
 	default List<Class<?>> getSupportedClasses() {
 		return Lists.newArrayList(WorkoutSet.class, WorkoutSetResource.class);

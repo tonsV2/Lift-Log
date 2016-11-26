@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 interface UserMapper extends ClassMapper<User, UserResource> {
 	@Override
-	@Mapping(target = "workoutSets", ignore = true)
+//	@Mapping(target = "workoutSets", ignore = true)
 	User map(UserResource resource);
 
 	@Override

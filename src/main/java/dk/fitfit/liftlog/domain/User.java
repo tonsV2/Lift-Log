@@ -4,14 +4,14 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class User implements FirstClassDomainObject {
+public class User implements DomainObject {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String name;
 	private String email;
-	@OneToMany
-	private Set<WorkoutSet> workoutSets;
+//	@OneToMany
+//	private Set<WorkoutSet> workoutSets;
 
 	public User() {
 	}
@@ -45,7 +45,7 @@ public class User implements FirstClassDomainObject {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+/*
 	public Set<WorkoutSet> getWorkoutSets() {
 		return workoutSets;
 	}
@@ -53,4 +53,5 @@ public class User implements FirstClassDomainObject {
 	public void setWorkoutSets(Set<WorkoutSet> workoutSets) {
 		this.workoutSets = workoutSets;
 	}
+*/
 }
