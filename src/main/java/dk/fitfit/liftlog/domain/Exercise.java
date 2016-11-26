@@ -9,6 +9,7 @@ public class Exercise implements DomainObject {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String name;
+	@Column(length = 1020)
 	private String description;
 	@OneToMany
 	private Set<WorkoutSet> workoutSets;
