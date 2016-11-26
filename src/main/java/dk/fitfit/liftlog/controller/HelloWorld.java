@@ -20,31 +20,12 @@ public class HelloWorld {
 	private final WorkoutSetService workoutSetService;
 	private final ExerciseService exerciseService;
 	private final UserService userService;
-	private final MapperService mapperService;
 
 	@Autowired
-	public HelloWorld(WorkoutSetService workoutSetService, ExerciseService exerciseService, UserService userService, MapperService mapperService) {
+	public HelloWorld(WorkoutSetService workoutSetService, ExerciseService exerciseService, UserService userService) {
 		this.workoutSetService = workoutSetService;
 		this.exerciseService = exerciseService;
 		this.userService = userService;
-		this.mapperService = mapperService;
-	}
-
-	@GetMapping("/users")
-	public Iterable<UserResource> users() {
-		Iterable<User> users = userService.findAll();
-		return mapperService.map(users);
-	}
-
-	@GetMapping("/users/{id}")
-	public UserResource user(@PathVariable long id) {
-		User user = userService.findOne(id);
-		return mapperService.map(user);
-	}
-
-	@GetMapping("/sets")
-	public Iterable<WorkoutSet> sets() {
-		return workoutSetService.findAll();
 	}
 
 	@GetMapping("/init")

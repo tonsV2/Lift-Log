@@ -5,7 +5,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import java.time.LocalDateTime;
 
-public class WorkoutSetResource {
+public class WorkoutSetResource implements ResourceObject {
 	private int repetition;
 	private double wight;
 	@JsonSerialize(using = LocalDateTimeSerializer.class)

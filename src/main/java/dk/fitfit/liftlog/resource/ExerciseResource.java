@@ -1,6 +1,6 @@
 package dk.fitfit.liftlog.resource;
 
-class ExerciseResource {
+public class ExerciseResource implements ResourceObject {
 	private String name;
 	private String description;
 
