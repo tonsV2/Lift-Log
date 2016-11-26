@@ -48,7 +48,7 @@ public class WorkoutSetController {
 	}
 
 	@GetMapping("/sets")
-	public Iterable<WorkoutSet> all() {
+	public Iterable<WorkoutSet> sets() {
 		return workoutSetService.findAll();
 	}
 }
