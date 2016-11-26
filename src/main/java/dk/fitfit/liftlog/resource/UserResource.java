@@ -1,8 +1,6 @@
 package dk.fitfit.liftlog.resource;
 
-import org.springframework.hateoas.ResourceSupport;
-
-public class UserResource extends ResourceSupport {
+public class UserResource implements ResourceObject {
 	private String name;
 	private String email;
 
