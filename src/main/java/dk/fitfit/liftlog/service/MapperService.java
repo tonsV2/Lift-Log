@@ -39,6 +39,8 @@ public class MapperService {
 		return mapper.map(resourceObject);
 	}
 
+// TODO: How to reverse this method... Swapping D and R on the Iterable's give the same method erasure (generic types are removed during compilation)
+//	public <D extends FirstClassDomainObject, R extends ResourceSupport> Iterable<D> map(Iterable<R> domainObjects) {
 	public <D extends FirstClassDomainObject, R extends ResourceSupport> Iterable<R> map(Iterable<D> domainObjects) {
 		List<R> resources = new ArrayList<>();
 		for (D domainObject : domainObjects) {
