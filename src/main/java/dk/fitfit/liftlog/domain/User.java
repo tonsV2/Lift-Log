@@ -10,8 +10,8 @@ public class User implements DomainObject {
 	private long id;
 	private String name;
 	private String email;
-//	@OneToMany
-//	private Set<WorkoutSet> workoutSets;
+	@OneToMany
+	private Set<WorkoutSet> workoutSets;
 
 	public User() {
 	}
@@ -45,7 +45,7 @@ public class User implements DomainObject {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-/*
+
 	public Set<WorkoutSet> getWorkoutSets() {
 		return workoutSets;
 	}
@@ -53,5 +53,4 @@ public class User implements DomainObject {
 	public void setWorkoutSets(Set<WorkoutSet> workoutSets) {
 		this.workoutSets = workoutSets;
 	}
-*/
 }
