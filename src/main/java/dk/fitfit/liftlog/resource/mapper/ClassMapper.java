@@ -6,12 +6,9 @@ import org.springframework.hateoas.ResourceSupport;
 
 import java.util.List;
 
-// Rename to Mapper... or probably Assembler so it wont clash with mapstruct @Mapper
 public interface ClassMapper<D extends FirstClassDomainObject, R extends ResourceSupport> {
 	R map(D domainObject);
-	@Mapping(target = "id", ignore = true)
+	@Mapping(target = "id", ignore = true) // Ignore self link on incoming resources
 	D map(R resourceObject);
-//	Iterable<R> map(Iterable<D> domainObjects);
-//	Iterable<D> map(Iterable<R> resourceObjects);
 	List<Class<?>> getSupportedClasses();
 }
