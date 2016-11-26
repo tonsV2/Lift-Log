@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 public class WorkoutSetResource implements ResourceObject {
 	private int repetition;
-	private double wight;
+	private double weight;
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	private LocalDateTime timestamp;
 	private ExerciseResource exercise;
@@ -21,12 +21,12 @@ public class WorkoutSetResource implements ResourceObject {
 		this.repetition = repetition;
 	}
 
-	public double getWight() {
-		return wight;
+	public double getWeight() {
+		return weight;
 	}
 
-	public void setWight(double wight) {
-		this.wight = wight;
+	public void setWeight(double weight) {
+		this.weight = weight;
 	}
 
 	public LocalDateTime getTimestamp() {

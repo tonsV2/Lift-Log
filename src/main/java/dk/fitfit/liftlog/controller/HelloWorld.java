@@ -48,7 +48,7 @@ public class HelloWorld {
 
 		WorkoutSet workoutSet = new WorkoutSet();
 		workoutSet.setRepetition(10);
-		workoutSet.setWight(70D);
+		workoutSet.setWeight(70D);
 
 		workoutSetService.log(user, bp, 10, 70D, LocalDateTime.now().minusDays(1));
 		workoutSetService.log(user, squat, 8, 70D, LocalDateTime.now().minusDays(1));

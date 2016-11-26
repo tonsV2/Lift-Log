@@ -31,14 +31,14 @@ public class WorkoutSetService {
 	public WorkoutSet log(User user, Exercise exercise, int repetition, double weight) {
 		WorkoutSet set = new WorkoutSet();
 		set.setRepetition(repetition);
-		set.setWight(weight);
+		set.setWeight(weight);
 		return log(user, exercise, set);
 	}
 
 	public WorkoutSet log(User user, Exercise exercise, int repetition, double weight, LocalDateTime localDateTime) {
 		WorkoutSet set = new WorkoutSet();
 		set.setRepetition(repetition);
-		set.setWight(weight);
+		set.setWeight(weight);
 		set.setTimestamp(localDateTime);
 		return log(user, exercise, set);
 	}

@@ -9,7 +9,7 @@ public class WorkoutSet implements DomainObject {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private int repetition;
-	private double wight;
+	private double weight;
 	private LocalDateTime timestamp;
 	@ManyToOne
 	private Exercise exercise;
@@ -37,12 +37,12 @@ public class WorkoutSet implements DomainObject {
 		this.repetition = repetition;
 	}
 
-	public double getWight() {
-		return wight;
+	public double getWeight() {
+		return weight;
 	}
 
-	public void setWight(double wight) {
-		this.wight = wight;
+	public void setWeight(double weight) {
+		this.weight = weight;
 	}
 
 	public LocalDateTime getTimestamp() {
