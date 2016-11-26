@@ -1,6 +1,7 @@
-package dk.fitfit.liftlog.resource.mapper;
+package dk.fitfit.liftlog.service;
 
 import dk.fitfit.liftlog.domain.FirstClassDomainObject;
+import dk.fitfit.liftlog.resource.mapper.ToResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.stereotype.Service;

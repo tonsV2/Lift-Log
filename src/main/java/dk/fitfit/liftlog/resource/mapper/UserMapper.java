@@ -5,13 +5,12 @@ import dk.fitfit.liftlog.domain.User;
 import dk.fitfit.liftlog.resource.UserResource;
 import org.mapstruct.Mapper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-abstract class UserMapper implements ToResource<User, UserResource> {
+interface UserMapper extends ToResource<User, UserResource> {
 	@Override
-	public List<Class<?>> getSupportedClasses() {
+	default List<Class<?>> getSupportedClasses() {
 		return Lists.newArrayList(User.class, UserResource.class);
 	}
 }

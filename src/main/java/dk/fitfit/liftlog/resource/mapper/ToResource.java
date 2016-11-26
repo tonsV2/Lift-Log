@@ -7,7 +7,7 @@ import org.springframework.hateoas.ResourceSupport;
 import java.util.List;
 
 // Rename to Mapper... or probably Assembler so it wont clash with mapstruct @Mapper
-interface ToResource<D extends FirstClassDomainObject, R extends ResourceSupport> {
+public interface ToResource<D extends FirstClassDomainObject, R extends ResourceSupport> {
 	R map(D domainObject);
 	@Mapping(target = "id", ignore = true)
 	D map(R resourceObject);

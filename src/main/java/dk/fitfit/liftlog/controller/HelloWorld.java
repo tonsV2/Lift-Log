@@ -4,7 +4,7 @@ import dk.fitfit.liftlog.domain.Exercise;
 import dk.fitfit.liftlog.domain.User;
 import dk.fitfit.liftlog.domain.WorkoutSet;
 import dk.fitfit.liftlog.resource.UserResource;
-import dk.fitfit.liftlog.resource.mapper.MapperService;
+import dk.fitfit.liftlog.service.MapperService;
 import dk.fitfit.liftlog.service.ExerciseService;
 import dk.fitfit.liftlog.service.UserService;
 import dk.fitfit.liftlog.service.WorkoutSetService;
