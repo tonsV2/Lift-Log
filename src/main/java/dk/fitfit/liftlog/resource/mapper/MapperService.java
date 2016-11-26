@@ -12,24 +12,30 @@ import java.util.Map;
 
 @Service
 public class MapperService {
-	private Map<Class<? extends FirstClassDomainObject>, ToResource<?, ?>> mappers = new HashMap<>();
+	private Map<Class<?>, ToResource<?, ?>> mappers = new HashMap<>();
 
 	@Autowired
 	public MapperService(List<ToResource<? extends FirstClassDomainObject, ? extends ResourceSupport>> mappers) {
 		for (ToResource<? extends FirstClassDomainObject, ? extends ResourceSupport> mapper : mappers) {
-			this.mappers.put(mapper.getSupportedClass(), mapper);
+			for (Class<?> supportedClass : mapper.getSupportedClasses()) {
+				this.mappers.put(supportedClass, mapper);
+			}
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	public <D extends FirstClassDomainObject, R extends ResourceSupport> ToResource<D, R> getMapper(Class<D> domainObjectClass) {
+	public <D extends FirstClassDomainObject, R extends ResourceSupport> ToResource<D, R> getMapper(Class<?> domainObjectClass) {
 		return (ToResource<D, R>) mappers.get(domainObjectClass);
 	}
 
-	@SuppressWarnings("unchecked")
 	public <D extends FirstClassDomainObject, R extends ResourceSupport> R map(D domainObject) {
-		ToResource<D, R> mapper = getMapper((Class<D>) domainObject.getClass());
+		ToResource<D, R> mapper = getMapper(domainObject.getClass());
 		return mapper.map(domainObject);
+	}
+
+	public <D extends FirstClassDomainObject, R extends ResourceSupport> D map(R resourceObject) {
+		ToResource<D, R> mapper = getMapper(resourceObject.getClass());
+		return mapper.map(resourceObject);
 	}
 
 	public <D extends FirstClassDomainObject, R extends ResourceSupport> Iterable<R> map(Iterable<D> domainObjects) {
