@@ -1,7 +1,7 @@
 package dk.fitfit.liftlog.service;
 
 import dk.fitfit.liftlog.domain.FirstClassDomainObject;
-import dk.fitfit.liftlog.resource.mapper.ToResource;
+import dk.fitfit.liftlog.resource.mapper.ClassMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.stereotype.Service;
@@ -13,11 +13,11 @@ import java.util.Map;
 
 @Service
 public class MapperService {
-	private Map<Class<?>, ToResource<?, ?>> mappers = new HashMap<>();
+	private Map<Class<?>, ClassMapper<?, ?>> mappers = new HashMap<>();
 
 	@Autowired
-	public MapperService(List<ToResource<? extends FirstClassDomainObject, ? extends ResourceSupport>> mappers) {
-		for (ToResource<? extends FirstClassDomainObject, ? extends ResourceSupport> mapper : mappers) {
+	public MapperService(List<ClassMapper<? extends FirstClassDomainObject, ? extends ResourceSupport>> mappers) {
+		for (ClassMapper<? extends FirstClassDomainObject, ? extends ResourceSupport> mapper : mappers) {
 			for (Class<?> supportedClass : mapper.getSupportedClasses()) {
 				this.mappers.put(supportedClass, mapper);
 			}
@@ -25,17 +25,17 @@ public class MapperService {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <D extends FirstClassDomainObject, R extends ResourceSupport> ToResource<D, R> getMapper(Class<?> domainObjectClass) {
-		return (ToResource<D, R>) mappers.get(domainObjectClass);
+	public <D extends FirstClassDomainObject, R extends ResourceSupport> ClassMapper<D, R> getMapper(Class<?> domainObjectClass) {
+		return (ClassMapper<D, R>) mappers.get(domainObjectClass);
 	}
 
 	public <D extends FirstClassDomainObject, R extends ResourceSupport> R map(D domainObject) {
-		ToResource<D, R> mapper = getMapper(domainObject.getClass());
+		ClassMapper<D, R> mapper = getMapper(domainObject.getClass());
 		return mapper.map(domainObject);
 	}
 
 	public <D extends FirstClassDomainObject, R extends ResourceSupport> D map(R resourceObject) {
-		ToResource<D, R> mapper = getMapper(resourceObject.getClass());
+		ClassMapper<D, R> mapper = getMapper(resourceObject.getClass());
 		return mapper.map(resourceObject);
 	}
 

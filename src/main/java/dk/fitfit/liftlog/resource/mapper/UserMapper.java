@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-interface UserMapper extends ToResource<User, UserResource> {
+interface UserMapper extends ClassMapper<User, UserResource> {
 	@Override
 	default List<Class<?>> getSupportedClasses() {
 		return Lists.newArrayList(User.class, UserResource.class);
