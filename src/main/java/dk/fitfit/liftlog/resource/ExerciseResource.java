@@ -9,6 +9,9 @@ public class ExerciseResource extends ResourceObject {
 	private String name;
 	private String description;
 
+	public ExerciseResource() {
+	}
+
 	private ExerciseResource(Exercise exercise) {
 		this.name = exercise.getName();
 		this.description = exercise.getDescription();

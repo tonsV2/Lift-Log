@@ -7,6 +7,9 @@ public class UserResource extends ResourceObject {
 // TODO: Don't just expose email...
 //	private String email;
 
+	public UserResource() {
+	}
+
 	private UserResource(User user) {
 		this.name = user.getName();
 	}

@@ -14,6 +14,9 @@ public class WorkoutSetResource extends ResourceObject {
 	private ExerciseResource exercise;
 	private UserResource user;
 
+	public WorkoutSetResource() {
+	}
+
 	private WorkoutSetResource(WorkoutSet workoutSet) {
 		this.repetition = workoutSet.getRepetition();
 		this.weight = workoutSet.getWeight();
