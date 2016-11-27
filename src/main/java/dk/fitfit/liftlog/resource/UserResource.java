@@ -1,17 +1,18 @@
 package dk.fitfit.liftlog.resource;
 
-public class UserResource implements ResourceObject {
-	private Long id;
+import dk.fitfit.liftlog.domain.User;
+
+public class UserResource extends ResourceObject {
 	private String name;
 // TODO: Don't just expose email...
 //	private String email;
 
-	public Long getId() {
-		return id;
+	private UserResource(User user) {
+		this.name = user.getName();
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public static UserResource from(User user) {
+		return new UserResource(user);
 	}
 
 	public String getName() {

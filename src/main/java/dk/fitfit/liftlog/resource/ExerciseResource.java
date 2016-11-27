@@ -1,16 +1,29 @@
 package dk.fitfit.liftlog.resource;
 
-public class ExerciseResource implements ResourceObject {
-	private Long id;
+import dk.fitfit.liftlog.domain.Exercise;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ExerciseResource extends ResourceObject {
 	private String name;
 	private String description;
 
-	public Long getId() {
-		return id;
+	private ExerciseResource(Exercise exercise) {
+		this.name = exercise.getName();
+		this.description = exercise.getDescription();
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public static ExerciseResource from(Exercise exercise) {
+		return new ExerciseResource(exercise);
+	}
+
+	public static Iterable<ExerciseResource> from(Iterable<Exercise> exercises) {
+		List<ExerciseResource> resources = new ArrayList<>();
+		for (Exercise exercise : exercises) {
+			resources.add(ExerciseResource.from(exercise));
+		}
+		return resources;
 	}
 
 	public String getName() {

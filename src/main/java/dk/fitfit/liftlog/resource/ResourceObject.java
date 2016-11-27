@@ -1,4 +1,6 @@
 package dk.fitfit.liftlog.resource;
 
-public interface ResourceObject {
+import org.springframework.hateoas.ResourceSupport;
+
+public class ResourceObject extends ResourceSupport {
 }

@@ -43,7 +43,7 @@ public class HelloWorld {
 		exerciseService.save(squat);
 		Exercise deadlift = new Exercise("Deadlift", "Back fucker! Ey, Thomas? ;-)");
 		exerciseService.save(deadlift);
-		Exercise chinup = new Exercise("Chin-up", "The chin-up (also known as a chin or chinup) is a strength training exercise. People frequently do this exercise with the intention of strengthening muscles such as the latissimus dorsi and biceps, which extend the shoulder and flex the elbow, respectively.");
+		Exercise chinup = new Exercise("Chin-up", "The chin-up (also known as a chin or chinup) is a strength training exercise. People frequently do this exercise with the intention from strengthening muscles such as the latissimus dorsi and biceps, which extend the shoulder and flex the elbow, respectively.");
 		exerciseService.save(chinup);
 
 		WorkoutSet workoutSet = new WorkoutSet();
