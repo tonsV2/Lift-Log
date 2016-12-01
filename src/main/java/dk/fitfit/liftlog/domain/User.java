@@ -14,7 +14,7 @@ public class User implements DomainObject, UserDetails {
 	private long id;
 	private String username;
 	private String email;
-	@OneToMany
+	@ManyToMany
 	private Set<Authority> authorities;
 	private boolean accountNonExpired = true;
 	private boolean accountNonLocked = true;
