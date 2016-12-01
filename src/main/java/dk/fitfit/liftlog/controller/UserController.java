@@ -7,7 +7,10 @@ import dk.fitfit.liftlog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.security.Principal;
 
 @RestController
 public class UserController {
@@ -18,6 +21,11 @@ public class UserController {
 	public UserController(UserService userService, MapperService mapperService) {
 		this.userService = userService;
 		this.mapperService = mapperService;
+	}
+
+	@RequestMapping("/user")
+	public Principal user(Principal principal) {
+		return principal;
 	}
 
 	@GetMapping("/users")
