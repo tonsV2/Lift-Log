@@ -3,26 +3,33 @@ package dk.fitfit.liftlog.resource;
 import dk.fitfit.liftlog.domain.User;
 
 public class UserResource extends ResourceObject {
-	private String name;
-// TODO: Don't just expose email...
-//	private String email;
+	private String username;
+	private String email;
 
 	public UserResource() {
 	}
 
 	private UserResource(User user) {
-		this.name = user.getName();
+		this.username = user.getUsername();
 	}
 
 	public static UserResource from(User user) {
 		return new UserResource(user);
 	}
 
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

@@ -45,8 +45,7 @@ public class UserControllerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		user = new User();
-		user.setName("name");
+		user = new User("username", "user@email.com");
 		userService.save(user);
 		userResource = mapperService.map(user);
 	}

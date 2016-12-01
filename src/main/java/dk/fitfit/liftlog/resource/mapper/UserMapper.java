@@ -10,6 +10,11 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 interface UserMapper extends ClassMapper<User, UserResource> {
 	@Override
+	default User map(UserResource resource) {
+		return new User(resource.getUsername(), resource.getEmail());
+	}
+
+	@Override
 	default List<Class<?>> getSupportedClasses() {
 		return Lists.newArrayList(User.class, UserResource.class);
 	}

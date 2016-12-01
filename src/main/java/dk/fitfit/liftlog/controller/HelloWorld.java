@@ -31,7 +31,7 @@ public class HelloWorld {
 
 	@GetMapping("/init")
 	public Iterable<WorkoutSetResource> init() {
-		User user = new User("tons", "tons@tons.dk");
+		User user = new User("tons", "token");
 		userService.save(user);
 
 		User user2 = new User("snot", "snot@tons.dk");
