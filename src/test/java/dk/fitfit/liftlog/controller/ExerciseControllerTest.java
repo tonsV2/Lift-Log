@@ -5,12 +5,11 @@ import com.google.common.collect.Lists;
 import dk.fitfit.liftlog.domain.Exercise;
 import dk.fitfit.liftlog.resource.ExerciseResource;
 import dk.fitfit.liftlog.resource.ResourceObject;
-import dk.fitfit.liftlog.service.ExerciseService;
+import dk.fitfit.liftlog.service.ExerciseServiceInterface;
 import dk.fitfit.liftlog.service.MapperService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -36,7 +35,7 @@ public class ExerciseControllerTest {
 	private MapperService mapperService;
 
 	@MockBean
-	private ExerciseService exerciseService;
+	private ExerciseServiceInterface exerciseService;
 
 	private ObjectMapper mapper = new ObjectMapper();
 

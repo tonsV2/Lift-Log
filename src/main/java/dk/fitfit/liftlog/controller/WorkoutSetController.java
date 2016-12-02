@@ -5,10 +5,10 @@ import dk.fitfit.liftlog.domain.User;
 import dk.fitfit.liftlog.domain.WorkoutSet;
 import dk.fitfit.liftlog.resource.WorkoutSetResource;
 import dk.fitfit.liftlog.security.CurrentUserHolder;
-import dk.fitfit.liftlog.service.ExerciseService;
+import dk.fitfit.liftlog.service.ExerciseServiceInterface;
 import dk.fitfit.liftlog.service.MapperService;
-import dk.fitfit.liftlog.service.UserService;
-import dk.fitfit.liftlog.service.WorkoutSetService;
+import dk.fitfit.liftlog.service.UserServiceInterface;
+import dk.fitfit.liftlog.service.WorkoutSetServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.*;
 public class WorkoutSetController {
 	private final CurrentUserHolder currentUserHolder;
 	private final MapperService mapperService;
-	private final WorkoutSetService workoutSetService;
-	private final UserService userService;
-	private final ExerciseService exerciseService;
+	private final WorkoutSetServiceInterface workoutSetService;
+	private final UserServiceInterface userService;
+	private final ExerciseServiceInterface exerciseService;
 
 	@Autowired
-	public WorkoutSetController(CurrentUserHolder currentUserHolder, MapperService mapperService, UserService userService, WorkoutSetService workoutSetService, ExerciseService exerciseService) {
+	public WorkoutSetController(CurrentUserHolder currentUserHolder, MapperService mapperService, UserServiceInterface userService, WorkoutSetServiceInterface workoutSetService, ExerciseServiceInterface exerciseService) {
 		this.currentUserHolder = currentUserHolder;
 		this.mapperService = mapperService;
 		this.userService = userService;

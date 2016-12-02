@@ -4,7 +4,7 @@ import dk.fitfit.liftlog.domain.User;
 import dk.fitfit.liftlog.resource.UserResource;
 import dk.fitfit.liftlog.security.CurrentUserHolder;
 import dk.fitfit.liftlog.service.MapperService;
-import dk.fitfit.liftlog.service.UserService;
+import dk.fitfit.liftlog.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,11 +16,11 @@ import java.security.Principal;
 @RestController
 public class UserController {
 	private final CurrentUserHolder currentUserHolder;
-	private final UserService userService;
+	private final UserServiceInterface userService;
 	private final MapperService mapperService;
 
 	@Autowired
-	public UserController(CurrentUserHolder currentUserHolder, UserService userService, MapperService mapperService) {
+	public UserController(CurrentUserHolder currentUserHolder, UserServiceInterface userService, MapperService mapperService) {
 		this.currentUserHolder = currentUserHolder;
 		this.userService = userService;
 		this.mapperService = mapperService;

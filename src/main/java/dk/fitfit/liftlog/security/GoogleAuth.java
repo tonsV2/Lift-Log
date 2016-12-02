@@ -4,7 +4,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import dk.fitfit.liftlog.service.ConfigurationService;
+import dk.fitfit.liftlog.service.ConfigurationServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,10 +14,10 @@ import java.util.Collections;
 
 @Component
 public class GoogleAuth {
-	private final ConfigurationService configurationService;
+	private final ConfigurationServiceInterface configurationService;
 
 	@Autowired
-	public GoogleAuth(ConfigurationService configurationService) {
+	public GoogleAuth(ConfigurationServiceInterface configurationService) {
 		this.configurationService = configurationService;
 	}
 

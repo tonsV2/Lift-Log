@@ -2,7 +2,7 @@ package dk.fitfit.liftlog.controller;
 
 import dk.fitfit.liftlog.domain.Exercise;
 import dk.fitfit.liftlog.resource.ExerciseResource;
-import dk.fitfit.liftlog.service.ExerciseService;
+import dk.fitfit.liftlog.service.ExerciseServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,10 +18,10 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
 public class ExerciseController {
-	private final ExerciseService exerciseService;
+	private final ExerciseServiceInterface exerciseService;
 
 	@Autowired
-	public ExerciseController(ExerciseService exerciseService) {
+	public ExerciseController(ExerciseServiceInterface exerciseService) {
 		this.exerciseService = exerciseService;
 	}
 

@@ -5,10 +5,10 @@ import dk.fitfit.liftlog.domain.User;
 import dk.fitfit.liftlog.domain.WorkoutSet;
 import dk.fitfit.liftlog.resource.WorkoutSetResource;
 import dk.fitfit.liftlog.security.CurrentUserHolder;
+import dk.fitfit.liftlog.service.ExerciseServiceInterface;
 import dk.fitfit.liftlog.service.MapperService;
-import dk.fitfit.liftlog.service.ExerciseService;
-import dk.fitfit.liftlog.service.UserService;
-import dk.fitfit.liftlog.service.WorkoutSetService;
+import dk.fitfit.liftlog.service.UserServiceInterface;
+import dk.fitfit.liftlog.service.WorkoutSetServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,12 +19,12 @@ import java.time.LocalDateTime;
 public class HelloWorld {
 	private final CurrentUserHolder currentUserHolder;
 	private final MapperService mapperService;
-	private final WorkoutSetService workoutSetService;
-	private final ExerciseService exerciseService;
-	private final UserService userService;
+	private final WorkoutSetServiceInterface workoutSetService;
+	private final ExerciseServiceInterface exerciseService;
+	private final UserServiceInterface userService;
 
 	@Autowired
-	public HelloWorld(CurrentUserHolder currentUserHolder, MapperService mapperService, WorkoutSetService workoutSetService, ExerciseService exerciseService, UserService userService) {
+	public HelloWorld(CurrentUserHolder currentUserHolder, MapperService mapperService, WorkoutSetServiceInterface workoutSetService, ExerciseServiceInterface exerciseService, UserServiceInterface userService) {
 		this.currentUserHolder = currentUserHolder;
 		this.mapperService = mapperService;
 		this.workoutSetService = workoutSetService;

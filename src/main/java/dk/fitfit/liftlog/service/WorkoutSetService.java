@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 
 @Service
-public class WorkoutSetService {
+public class WorkoutSetService implements WorkoutSetServiceInterface {
 	private final WorkoutSetRepository workoutSetRepository;
 
 	@Autowired
@@ -18,16 +18,19 @@ public class WorkoutSetService {
 		this.workoutSetRepository = workoutSetRepository;
 	}
 
+	@Override
 	public Iterable<WorkoutSet> findAll(User user) {
 		return workoutSetRepository.findByUser(user);
 	}
 
+	@Override
 	public WorkoutSet log(User user, Exercise exercise, WorkoutSet set) {
 		set.setUser(user);
 		set.setExercise(exercise);
 		return workoutSetRepository.save(set);
 	}
 
+	@Override
 	public WorkoutSet log(User user, Exercise exercise, int repetition, double weight) {
 		WorkoutSet set = new WorkoutSet();
 		set.setRepetition(repetition);
@@ -35,6 +38,7 @@ public class WorkoutSetService {
 		return log(user, exercise, set);
 	}
 
+	@Override
 	public WorkoutSet log(User user, Exercise exercise, int repetition, double weight, LocalDateTime localDateTime) {
 		WorkoutSet set = new WorkoutSet();
 		set.setRepetition(repetition);
@@ -43,6 +47,7 @@ public class WorkoutSetService {
 		return log(user, exercise, set);
 	}
 
+	@Override
 	public WorkoutSet save(WorkoutSet set) {
 		return workoutSetRepository.save(set);
 	}

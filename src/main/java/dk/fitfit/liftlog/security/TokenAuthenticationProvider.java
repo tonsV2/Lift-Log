@@ -1,7 +1,7 @@
 package dk.fitfit.liftlog.security;
 
 import dk.fitfit.liftlog.domain.User;
-import dk.fitfit.liftlog.service.UserService;
+import dk.fitfit.liftlog.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TokenAuthenticationProvider implements AuthenticationProvider {
-	private final UserService userService;
+	private final UserServiceInterface userService;
 
 	@Autowired
-	public TokenAuthenticationProvider(UserService userService) {
+	public TokenAuthenticationProvider(UserServiceInterface userService) {
 		this.userService = userService;
 	}
 

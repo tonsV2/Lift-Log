@@ -1,7 +1,7 @@
 package dk.fitfit.liftlog.security;
 
 import dk.fitfit.liftlog.domain.User;
-import dk.fitfit.liftlog.service.UserService;
+import dk.fitfit.liftlog.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,10 +12,10 @@ import java.util.Map;
 
 @Component
 public class CurrentUserHolder {
-	private final UserService userService;
+	private final UserServiceInterface userService;
 
 	@Autowired
-	public CurrentUserHolder(UserService userService) {
+	public CurrentUserHolder(UserServiceInterface userService) {
 		this.userService = userService;
 	}
 

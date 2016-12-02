@@ -6,10 +6,9 @@ import dk.fitfit.liftlog.domain.User;
 import dk.fitfit.liftlog.resource.ResourceObject;
 import dk.fitfit.liftlog.resource.UserResource;
 import dk.fitfit.liftlog.service.MapperService;
-import dk.fitfit.liftlog.service.UserService;
+import dk.fitfit.liftlog.service.UserServiceInterface;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ public class UserControllerTest {
 	private MockMvc mvc;
 
 	@Autowired
-	private UserService userService;
+	private UserServiceInterface userService;
 
 	@Autowired
 	private MapperService mapperService;
