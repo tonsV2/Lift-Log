@@ -20,19 +20,19 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
 	}
 
 	@Override
-	public Authentication authenticate(Authentication auth) throws AuthenticationException {
-		if (auth.isAuthenticated()) {
-			return auth;
+	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+		if (authentication.isAuthenticated()) {
+			return authentication;
 		}
-		String token = auth.getCredentials().toString();
+		String token = authentication.getCredentials().toString();
 		User user = validateTokenAndFindUser(token);
 		if (user != null) {
-			auth = new PreAuthenticatedAuthenticationToken(user, token);
-			auth.setAuthenticated(true);
+			authentication = new PreAuthenticatedAuthenticationToken(user, token);
+			authentication.setAuthenticated(true);
 		} else {
 			throw new BadCredentialsException("Invalid token " + token);
 		}
-		return auth;
+		return authentication;
 	}
 
 	private User validateTokenAndFindUser(String token) {
@@ -40,7 +40,7 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
 	}
 
 	@Override
-	public boolean supports(Class<?> aClass) {
-		return true;
+	public boolean supports(Class<?> authentication) {
+		return TokenAuthentication.class.isAssignableFrom(authentication);
 	}
 }
