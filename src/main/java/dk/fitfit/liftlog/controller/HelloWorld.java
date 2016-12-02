@@ -4,6 +4,7 @@ import dk.fitfit.liftlog.domain.Exercise;
 import dk.fitfit.liftlog.domain.User;
 import dk.fitfit.liftlog.domain.WorkoutSet;
 import dk.fitfit.liftlog.resource.WorkoutSetResource;
+import dk.fitfit.liftlog.security.CurrentUserHolder;
 import dk.fitfit.liftlog.service.MapperService;
 import dk.fitfit.liftlog.service.ExerciseService;
 import dk.fitfit.liftlog.service.UserService;
@@ -16,13 +17,15 @@ import java.time.LocalDateTime;
 
 @RestController
 public class HelloWorld {
+	private final CurrentUserHolder currentUserHolder;
 	private final MapperService mapperService;
 	private final WorkoutSetService workoutSetService;
 	private final ExerciseService exerciseService;
 	private final UserService userService;
 
 	@Autowired
-	public HelloWorld(MapperService mapperService, WorkoutSetService workoutSetService, ExerciseService exerciseService, UserService userService) {
+	public HelloWorld(CurrentUserHolder currentUserHolder, MapperService mapperService, WorkoutSetService workoutSetService, ExerciseService exerciseService, UserService userService) {
+		this.currentUserHolder = currentUserHolder;
 		this.mapperService = mapperService;
 		this.workoutSetService = workoutSetService;
 		this.exerciseService = exerciseService;
@@ -31,11 +34,13 @@ public class HelloWorld {
 
 	@GetMapping("/init")
 	public Iterable<WorkoutSetResource> init() {
-		User user = new User("tons", "token");
-		userService.save(user);
+//		User user = new User("106124068689044163331", "tons", "token");
+//		userService.save(user);
 
-		User user2 = new User("snot", "snot@tons.dk");
-		userService.save(user2);
+//		User user2 = new User("some random sub", "snot", "snot@tons.dk");
+//		userService.save(user2);
+
+		User user = currentUserHolder.getUser();
 
 		Exercise bp = new Exercise("Bench press", "Pecks, baby!");
 		exerciseService.save(bp);
@@ -59,7 +64,7 @@ public class HelloWorld {
 		workoutSetService.log(user, bp, 10, 70D, LocalDateTime.now().plusDays(1));
 		workoutSetService.log(user, squat, 8, 70D, LocalDateTime.now().plusDays(1));
 
-		Iterable<WorkoutSet> workoutSets = workoutSetService.findAll();
+		Iterable<WorkoutSet> workoutSets = workoutSetService.findAll(currentUserHolder.getUser());
 		return mapperService.map(workoutSets);
 	}
 

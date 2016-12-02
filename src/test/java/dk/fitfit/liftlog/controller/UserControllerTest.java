@@ -45,7 +45,7 @@ public class UserControllerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		user = new User("username", "user@email.com");
+		user = new User("some random sub", "username", "user@email.com");
 		userService.save(user);
 		userResource = mapperService.map(user);
 	}

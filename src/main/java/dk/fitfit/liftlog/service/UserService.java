@@ -14,10 +14,6 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 
-	public Iterable<User> findAll() {
-		return userRepository.findAll();
-	}
-
 	public User findOne(long id) {
 		return userRepository.findOne(id);
 	}
@@ -32,5 +28,14 @@ public class UserService {
 
 	public void delete(User user) {
 		userRepository.delete(user);
+	}
+
+	public User findBySub(String sub) {
+		return userRepository.findBySub(sub);
+	}
+
+	public User create(String sub, String name, String email) {
+		User user = new User(sub, name, email);
+		return userRepository.save(user);
 	}
 }

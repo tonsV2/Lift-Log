@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
 
@@ -14,19 +15,22 @@ public class User implements DomainObject, UserDetails {
 	private long id;
 	private String username;
 	private String email;
-	@ManyToMany
+	private String sub; // Google identifier
+	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Authority> authorities;
 	private boolean accountNonExpired = true;
 	private boolean accountNonLocked = true;
 	private boolean credentialsNonExpired = true;
 	private boolean enabled = true;
+	private LocalDateTime createdAt = LocalDateTime.now();
 	@OneToMany
 	private Set<WorkoutSet> workoutSets;
 
 	public User() {
 	}
 
-	public User(String username, String email) {
+	public User(String sub, String username, String email) {
+		this.sub = sub;
 		this.username = username;
 		this.email = email;
 	}
@@ -46,6 +50,14 @@ public class User implements DomainObject, UserDetails {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getSub() {
+		return sub;
+	}
+
+	public void setSub(String sub) {
+		this.sub = sub;
 	}
 
 	public Set<WorkoutSet> getWorkoutSets() {

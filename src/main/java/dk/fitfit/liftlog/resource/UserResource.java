@@ -11,6 +11,7 @@ public class UserResource extends ResourceObject {
 
 	private UserResource(User user) {
 		this.username = user.getUsername();
+		this.email = user.getEmail();
 	}
 
 	public static UserResource from(User user) {

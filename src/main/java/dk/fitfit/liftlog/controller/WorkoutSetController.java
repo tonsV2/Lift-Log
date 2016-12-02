@@ -4,6 +4,7 @@ import dk.fitfit.liftlog.domain.Exercise;
 import dk.fitfit.liftlog.domain.User;
 import dk.fitfit.liftlog.domain.WorkoutSet;
 import dk.fitfit.liftlog.resource.WorkoutSetResource;
+import dk.fitfit.liftlog.security.CurrentUserHolder;
 import dk.fitfit.liftlog.service.ExerciseService;
 import dk.fitfit.liftlog.service.MapperService;
 import dk.fitfit.liftlog.service.UserService;
@@ -13,13 +14,15 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class WorkoutSetController {
+	private final CurrentUserHolder currentUserHolder;
 	private final MapperService mapperService;
 	private final WorkoutSetService workoutSetService;
 	private final UserService userService;
 	private final ExerciseService exerciseService;
 
 	@Autowired
-	public WorkoutSetController(MapperService mapperService, UserService userService, WorkoutSetService workoutSetService, ExerciseService exerciseService) {
+	public WorkoutSetController(CurrentUserHolder currentUserHolder, MapperService mapperService, UserService userService, WorkoutSetService workoutSetService, ExerciseService exerciseService) {
+		this.currentUserHolder = currentUserHolder;
 		this.mapperService = mapperService;
 		this.userService = userService;
 		this.workoutSetService = workoutSetService;
@@ -29,7 +32,7 @@ public class WorkoutSetController {
 	@PostMapping("/sets/prototype/{exerciseId}")
 	public WorkoutSetResource prototype(@PathVariable long exerciseId) {
 		WorkoutSet workoutSet = new WorkoutSet();
-		User user = userService.findOne(1);
+		User user = currentUserHolder.getUser();
 		workoutSet.setUser(user);
 		Exercise exercise = exerciseService.findOne(exerciseId);
 		// TODO: Throw 404 if exercise == null
@@ -41,7 +44,7 @@ public class WorkoutSetController {
 	public WorkoutSetResource save(@RequestBody WorkoutSetResource workoutSetResource) {
 		WorkoutSet workoutSet = mapperService.map(workoutSetResource);
 		// TODO: Find logged in user... or throw 401
-		User user = userService.findOne(1);
+		User user = currentUserHolder.getUser();
 		workoutSet.setUser(user);
 		WorkoutSet saved = workoutSetService.save(workoutSet);
 		return mapperService.map(saved);
@@ -49,6 +52,6 @@ public class WorkoutSetController {
 
 	@GetMapping("/sets")
 	public Iterable<WorkoutSet> sets() {
-		return workoutSetService.findAll();
+		return workoutSetService.findAll(currentUserHolder.getUser());
 	}
 }

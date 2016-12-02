@@ -18,8 +18,8 @@ public class WorkoutSetService {
 		this.workoutSetRepository = workoutSetRepository;
 	}
 
-	public Iterable<WorkoutSet> findAll() {
-		return workoutSetRepository.findAll();
+	public Iterable<WorkoutSet> findAll(User user) {
+		return workoutSetRepository.findByUser(user);
 	}
 
 	public WorkoutSet log(User user, Exercise exercise, WorkoutSet set) {
