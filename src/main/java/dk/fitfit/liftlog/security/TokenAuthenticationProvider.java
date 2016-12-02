@@ -25,7 +25,7 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
 			return authentication;
 		}
 		String token = authentication.getCredentials().toString();
-		User user = validateTokenAndFindUser(token);
+		User user = findUserByToken(token);
 		if (user != null) {
 			authentication = new PreAuthenticatedAuthenticationToken(user, token);
 			authentication.setAuthenticated(true);
@@ -35,8 +35,8 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
 		return authentication;
 	}
 
-	private User validateTokenAndFindUser(String token) {
-		return userService.findByEmail(token);
+	private User findUserByToken(String token) {
+		return userService.findByToken(token);
 	}
 
 	@Override
