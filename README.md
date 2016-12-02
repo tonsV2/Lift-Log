@@ -9,6 +9,7 @@ Backend for logging of weight lifting exercises.
 - This should be done by wrapping all return values in ResponseEntity's
 
 ## Only objects returned should be either org.springframework.hateoas.Resources or org.springframework.hateoas.Resource and with proper hateoas links
+- Ensure this by writing a reflection based test?
 
 # Notes
 ## Android api auth
