@@ -10,14 +10,20 @@ public class WorkoutSet implements DomainObject {
 	private long id;
 	private int repetition;
 	private double weight;
-	private LocalDateTime timestamp;
+	private LocalDateTime timestamp = LocalDateTime.now();
 	@ManyToOne
 	private Exercise exercise;
 	@ManyToOne
 	private User user;
+	@ManyToOne
+	private Session session;
 
 	public WorkoutSet() {
 		this.timestamp = LocalDateTime.now();
+	}
+
+	public boolean olderThan(int minutes) {
+		return timestamp.isBefore(LocalDateTime.now().minusMinutes(minutes));
 	}
 
 	@Override
@@ -67,5 +73,13 @@ public class WorkoutSet implements DomainObject {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Session getSession() {
+		return session;
+	}
+
+	public void setSession(Session session) {
+		this.session = session;
 	}
 }

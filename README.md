@@ -11,6 +11,8 @@ Backend for logging of weight lifting exercises.
 ## Only objects returned should be either org.springframework.hateoas.Resources or org.springframework.hateoas.Resource and with proper hateoas links
 - Ensure this by writing a reflection based test?
 
+## Remove user from sets... only sessions should be associated with a user
+
 # Notes
 ## Android api auth
 Send token as password towards basic auth. Use custom filter to validate against google... ?

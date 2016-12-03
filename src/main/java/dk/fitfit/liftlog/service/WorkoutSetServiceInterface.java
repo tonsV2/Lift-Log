@@ -11,5 +11,6 @@ public interface WorkoutSetServiceInterface {
 	WorkoutSet log(User user, Exercise exercise, WorkoutSet set);
 	WorkoutSet log(User user, Exercise exercise, int repetition, double weight);
 	WorkoutSet log(User user, Exercise exercise, int repetition, double weight, LocalDateTime localDateTime);
-	WorkoutSet save(WorkoutSet set);
+	WorkoutSet save(User user, WorkoutSet set);
+	WorkoutSet findLastSet(User user);
 }

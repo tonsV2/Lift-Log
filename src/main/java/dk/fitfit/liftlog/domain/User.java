@@ -24,7 +24,7 @@ public class User implements DomainObject, UserDetails {
 	private boolean enabled = true;
 	private LocalDateTime createdAt = LocalDateTime.now();
 	@OneToMany
-	private Set<WorkoutSet> workoutSets;
+	private Set<Session> sessions;
 
 	public User() {
 	}
@@ -60,12 +60,12 @@ public class User implements DomainObject, UserDetails {
 		this.sub = sub;
 	}
 
-	public Set<WorkoutSet> getWorkoutSets() {
-		return workoutSets;
+	public Set<Session> getSessions() {
+		return sessions;
 	}
 
-	public void setWorkoutSets(Set<WorkoutSet> workoutSets) {
-		this.workoutSets = workoutSets;
+	public void setSessions(Set<Session> sessions) {
+		this.sessions = sessions;
 	}
 
 	public void setAccountNonExpired(boolean accountNonExpired) {

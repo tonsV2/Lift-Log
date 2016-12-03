@@ -7,7 +7,6 @@ import dk.fitfit.liftlog.resource.WorkoutSetResource;
 import dk.fitfit.liftlog.security.CurrentUserHolder;
 import dk.fitfit.liftlog.service.ExerciseServiceInterface;
 import dk.fitfit.liftlog.service.MapperService;
-import dk.fitfit.liftlog.service.UserServiceInterface;
 import dk.fitfit.liftlog.service.WorkoutSetServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,14 +16,12 @@ public class WorkoutSetController {
 	private final CurrentUserHolder currentUserHolder;
 	private final MapperService mapperService;
 	private final WorkoutSetServiceInterface workoutSetService;
-	private final UserServiceInterface userService;
 	private final ExerciseServiceInterface exerciseService;
 
 	@Autowired
-	public WorkoutSetController(CurrentUserHolder currentUserHolder, MapperService mapperService, UserServiceInterface userService, WorkoutSetServiceInterface workoutSetService, ExerciseServiceInterface exerciseService) {
+	public WorkoutSetController(CurrentUserHolder currentUserHolder, MapperService mapperService, WorkoutSetServiceInterface workoutSetService, ExerciseServiceInterface exerciseService) {
 		this.currentUserHolder = currentUserHolder;
 		this.mapperService = mapperService;
-		this.userService = userService;
 		this.workoutSetService = workoutSetService;
 		this.exerciseService = exerciseService;
 	}
@@ -43,11 +40,15 @@ public class WorkoutSetController {
 	@PostMapping("/sets")
 	public WorkoutSetResource save(@RequestBody WorkoutSetResource workoutSetResource) {
 		WorkoutSet workoutSet = mapperService.map(workoutSetResource);
-		// TODO: Find logged in user... or throw 401
 		User user = currentUserHolder.getUser();
-		workoutSet.setUser(user);
-		WorkoutSet saved = workoutSetService.save(workoutSet);
+		WorkoutSet saved = workoutSetService.save(user, workoutSet);
 		return mapperService.map(saved);
+	}
+
+	@GetMapping("/sets/test")
+	public WorkoutSet test() {
+		User user = currentUserHolder.getUser();
+		return workoutSetService.save(user, new WorkoutSet());
 	}
 
 	@GetMapping("/sets")
