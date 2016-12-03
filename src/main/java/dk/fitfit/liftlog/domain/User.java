@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
 
-@Entity
+@Entity(name = "users") // Postgres doesn't like the table name "user"
 public class User implements DomainObject, UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class User implements DomainObject, UserDetails {
 	private boolean credentialsNonExpired = true;
 	private boolean enabled = true;
 	private LocalDateTime createdAt = LocalDateTime.now();
-	@OneToMany
+	@OneToMany(mappedBy = "user")
 	private Set<Session> sessions;
 
 	public User() {

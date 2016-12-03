@@ -11,7 +11,7 @@ public class Exercise implements DomainObject {
 	private String name;
 	@Column(length = 1020)
 	private String description;
-	@OneToMany
+	@OneToMany(mappedBy = "exercise")
 	private Set<WorkoutSet> workoutSets;
 
 	public Exercise() {

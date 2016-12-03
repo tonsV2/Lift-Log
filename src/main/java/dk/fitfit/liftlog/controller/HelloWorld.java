@@ -34,12 +34,6 @@ public class HelloWorld {
 
 	@GetMapping("/init")
 	public Iterable<WorkoutSetResource> init() {
-//		User user = new User("106124068689044163331", "tons", "token");
-//		userService.save(user);
-
-//		User user2 = new User("some random sub", "snot", "snot@tons.dk");
-//		userService.save(user2);
-
 		User user = currentUserHolder.getUser();
 
 		Exercise bp = new Exercise("Bench press", "Pecks, baby!");
@@ -51,18 +45,14 @@ public class HelloWorld {
 		Exercise chinup = new Exercise("Chin-up", "The chin-up (also known as a chin or chinup) is a strength training exercise. People frequently do this exercise with the intention from strengthening muscles such as the latissimus dorsi and biceps, which extend the shoulder and flex the elbow, respectively.");
 		exerciseService.save(chinup);
 
-		WorkoutSet workoutSet = new WorkoutSet();
-		workoutSet.setRepetition(10);
-		workoutSet.setWeight(70D);
-
-		workoutSetService.log(user, bp, 10, 70D, LocalDateTime.now().minusDays(1));
+		workoutSetService.log(user, bp, 10, 60D, LocalDateTime.now().minusDays(1));
 		workoutSetService.log(user, squat, 8, 70D, LocalDateTime.now().minusDays(1));
 
-		workoutSetService.log(user, bp, workoutSet);
-		workoutSetService.log(user, squat, 8, 70D);
+		workoutSetService.log(user, bp, 10, 65D);
+		workoutSetService.log(user, squat, 8, 75D);
 
 		workoutSetService.log(user, bp, 10, 70D, LocalDateTime.now().plusDays(1));
-		workoutSetService.log(user, squat, 8, 70D, LocalDateTime.now().plusDays(1));
+		workoutSetService.log(user, squat, 8, 80D, LocalDateTime.now().plusDays(1));
 
 		Iterable<WorkoutSet> workoutSets = workoutSetService.findAll(currentUserHolder.getUser());
 		return mapperService.map(workoutSets);

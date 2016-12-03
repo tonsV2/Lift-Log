@@ -11,19 +11,15 @@ public class WorkoutSet implements DomainObject {
 	private int repetition;
 	private double weight;
 	private LocalDateTime timestamp = LocalDateTime.now();
-	@ManyToOne
+	@OneToOne
 	private Exercise exercise;
-	@ManyToOne
+	@OneToOne
 	private User user;
 	@ManyToOne
 	private Session session;
 
 	public WorkoutSet() {
 		this.timestamp = LocalDateTime.now();
-	}
-
-	public boolean olderThan(int minutes) {
-		return timestamp.isBefore(LocalDateTime.now().minusMinutes(minutes));
 	}
 
 	@Override

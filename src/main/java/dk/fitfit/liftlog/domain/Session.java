@@ -12,7 +12,7 @@ public class Session implements DomainObject {
 	private LocalDateTime timestamp = LocalDateTime.now();
 	@ManyToOne
 	private User user;
-	@OneToMany
+	@OneToMany(mappedBy = "session")
 	private Set<WorkoutSet> sets;
 
 	@Override
