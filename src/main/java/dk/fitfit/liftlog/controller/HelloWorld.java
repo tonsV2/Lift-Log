@@ -54,7 +54,7 @@ public class HelloWorld {
 		workoutSetService.log(user, bp, 10, 70D, LocalDateTime.now().plusDays(1));
 		workoutSetService.log(user, squat, 8, 80D, LocalDateTime.now().plusDays(1));
 
-		Iterable<WorkoutSet> workoutSets = workoutSetService.findAll(currentUserHolder.getUser());
+		Iterable<WorkoutSet> workoutSets = workoutSetService.findAll(user);
 		return mapperService.map(workoutSets);
 	}
 

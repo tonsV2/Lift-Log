@@ -33,7 +33,6 @@ public class WorkoutSetService implements WorkoutSetServiceInterface {
 	@Override
 	public WorkoutSet log(User user, Exercise exercise, int repetition, double weight) {
 		WorkoutSet set = new WorkoutSet();
-		set.setUser(user);
 		set.setExercise(exercise);
 		set.setRepetition(repetition);
 		set.setWeight(weight);
@@ -52,7 +51,6 @@ public class WorkoutSetService implements WorkoutSetServiceInterface {
 
 	@Override
 	public WorkoutSet save(User user, WorkoutSet set) {
-		set.setUser(user);
 		WorkoutSet lastSet = findLastSet(user);
 		if(lastSet != null && sameSession(lastSet, set)) {
 			Session session = lastSet.getSession();
@@ -73,7 +71,7 @@ public class WorkoutSetService implements WorkoutSetServiceInterface {
 	@Override
 	public WorkoutSet findLastSet(User user) {
 		Pageable limit = new PageRequest(0, 1);
-		List<WorkoutSet> sets = workoutSetRepository.findByUserOrderByTimestampDesc(user, limit);
+		List<WorkoutSet> sets = workoutSetRepository.findLastSet(user, limit);
 		if(sets.isEmpty()) {
 			return null;
 		}

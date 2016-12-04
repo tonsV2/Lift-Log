@@ -12,7 +12,6 @@ public class WorkoutSetResource extends ResourceObject {
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	private LocalDateTime timestamp;
 	private ExerciseResource exercise;
-	private UserResource user;
 
 	public WorkoutSetResource() {
 	}
@@ -22,7 +21,6 @@ public class WorkoutSetResource extends ResourceObject {
 		this.weight = workoutSet.getWeight();
 		this.timestamp = workoutSet.getTimestamp();
 		this.exercise = ExerciseResource.from(workoutSet.getExercise());
-		this.user = UserResource.from(workoutSet.getUser());
 	}
 
 	public static WorkoutSetResource from(WorkoutSet workoutSet) {
@@ -59,13 +57,5 @@ public class WorkoutSetResource extends ResourceObject {
 
 	public void setExercise(ExerciseResource exercise) {
 		this.exercise = exercise;
-	}
-
-	public UserResource getUser() {
-		return user;
-	}
-
-	public void setUser(UserResource user) {
-		this.user = user;
 	}
 }

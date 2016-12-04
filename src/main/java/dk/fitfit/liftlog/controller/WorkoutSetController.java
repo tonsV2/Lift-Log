@@ -29,8 +29,6 @@ public class WorkoutSetController {
 	@PostMapping("/sets/prototype/{exerciseId}")
 	public WorkoutSetResource prototype(@PathVariable long exerciseId) {
 		WorkoutSet workoutSet = new WorkoutSet();
-		User user = currentUserHolder.getUser();
-		workoutSet.setUser(user);
 		Exercise exercise = exerciseService.findOne(exerciseId);
 		// TODO: Throw 404 if exercise == null
 		workoutSet.setExercise(exercise);
@@ -46,13 +44,15 @@ public class WorkoutSetController {
 	}
 
 	@GetMapping("/sets/test")
-	public WorkoutSet test() {
+	public WorkoutSetResource test() {
 		User user = currentUserHolder.getUser();
-		return workoutSetService.save(user, new WorkoutSet());
+		WorkoutSet saved = workoutSetService.save(user, new WorkoutSet());
+		return mapperService.map(saved);
 	}
 
 	@GetMapping("/sets")
-	public Iterable<WorkoutSet> sets() {
-		return workoutSetService.findAll(currentUserHolder.getUser());
+	public Iterable<WorkoutSetResource> sets() {
+		Iterable<WorkoutSet> sets = workoutSetService.findAll(currentUserHolder.getUser());
+		return mapperService.map(sets);
 	}
 }

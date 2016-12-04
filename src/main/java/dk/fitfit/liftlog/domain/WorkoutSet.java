@@ -13,8 +13,6 @@ public class WorkoutSet implements DomainObject {
 	private LocalDateTime timestamp = LocalDateTime.now();
 	@OneToOne
 	private Exercise exercise;
-	@OneToOne
-	private User user;
 	@ManyToOne
 	private Session session;
 
@@ -61,14 +59,6 @@ public class WorkoutSet implements DomainObject {
 
 	public void setExercise(Exercise exercise) {
 		this.exercise = exercise;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	public Session getSession() {
