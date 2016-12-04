@@ -5,6 +5,9 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import dk.fitfit.liftlog.domain.WorkoutSet;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class WorkoutSetResource extends ResourceObject {
 	private int repetition;
@@ -21,6 +24,15 @@ public class WorkoutSetResource extends ResourceObject {
 		this.weight = workoutSet.getWeight();
 		this.timestamp = workoutSet.getTimestamp();
 		this.exercise = ExerciseResource.from(workoutSet.getExercise());
+	}
+
+	public static List<WorkoutSetResource> from(Set<WorkoutSet> sets) {
+		List<WorkoutSetResource> resources = new ArrayList<>();
+		for (WorkoutSet set : sets) {
+			WorkoutSetResource resource = WorkoutSetResource.from(set);
+			resources.add(resource);
+		}
+		return resources;
 	}
 
 	public static WorkoutSetResource from(WorkoutSet workoutSet) {

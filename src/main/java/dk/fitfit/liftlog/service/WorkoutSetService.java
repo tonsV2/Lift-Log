@@ -26,11 +26,6 @@ public class WorkoutSetService implements WorkoutSetServiceInterface {
 	}
 
 	@Override
-	public Iterable<WorkoutSet> findAll(User user) {
-		return workoutSetRepository.findByUser(user);
-	}
-
-	@Override
 	public WorkoutSet log(User user, Exercise exercise, int repetition, double weight) {
 		WorkoutSet set = new WorkoutSet();
 		set.setExercise(exercise);

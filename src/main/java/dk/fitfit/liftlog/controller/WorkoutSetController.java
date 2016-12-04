@@ -49,10 +49,4 @@ public class WorkoutSetController {
 		WorkoutSet saved = workoutSetService.save(user, new WorkoutSet());
 		return mapperService.map(saved);
 	}
-
-	@GetMapping("/sets")
-	public Iterable<WorkoutSetResource> sets() {
-		Iterable<WorkoutSet> sets = workoutSetService.findAll(currentUserHolder.getUser());
-		return mapperService.map(sets);
-	}
 }

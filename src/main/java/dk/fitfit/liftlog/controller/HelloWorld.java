@@ -1,19 +1,17 @@
 package dk.fitfit.liftlog.controller;
 
 import dk.fitfit.liftlog.domain.Exercise;
+import dk.fitfit.liftlog.domain.Session;
 import dk.fitfit.liftlog.domain.User;
-import dk.fitfit.liftlog.domain.WorkoutSet;
-import dk.fitfit.liftlog.resource.WorkoutSetResource;
+import dk.fitfit.liftlog.resource.SessionResource;
 import dk.fitfit.liftlog.security.CurrentUserHolder;
-import dk.fitfit.liftlog.service.ExerciseServiceInterface;
-import dk.fitfit.liftlog.service.MapperService;
-import dk.fitfit.liftlog.service.UserServiceInterface;
-import dk.fitfit.liftlog.service.WorkoutSetServiceInterface;
+import dk.fitfit.liftlog.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 public class HelloWorld {
@@ -21,19 +19,19 @@ public class HelloWorld {
 	private final MapperService mapperService;
 	private final WorkoutSetServiceInterface workoutSetService;
 	private final ExerciseServiceInterface exerciseService;
-	private final UserServiceInterface userService;
+	private final SessionServiceInterface sessionService;
 
 	@Autowired
-	public HelloWorld(CurrentUserHolder currentUserHolder, MapperService mapperService, WorkoutSetServiceInterface workoutSetService, ExerciseServiceInterface exerciseService, UserServiceInterface userService) {
+	public HelloWorld(CurrentUserHolder currentUserHolder, MapperService mapperService, WorkoutSetServiceInterface workoutSetService, ExerciseServiceInterface exerciseService, SessionServiceInterface sessionService) {
 		this.currentUserHolder = currentUserHolder;
 		this.mapperService = mapperService;
 		this.workoutSetService = workoutSetService;
 		this.exerciseService = exerciseService;
-		this.userService = userService;
+		this.sessionService = sessionService;
 	}
 
 	@GetMapping("/init")
-	public Iterable<WorkoutSetResource> init() {
+	public List<SessionResource> init() {
 		User user = currentUserHolder.getUser();
 
 		Exercise bp = new Exercise("Bench press", "Pecks, baby!");
@@ -54,8 +52,9 @@ public class HelloWorld {
 		workoutSetService.log(user, bp, 10, 70D, LocalDateTime.now().plusDays(1));
 		workoutSetService.log(user, squat, 8, 80D, LocalDateTime.now().plusDays(1));
 
-		Iterable<WorkoutSet> workoutSets = workoutSetService.findAll(user);
-		return mapperService.map(workoutSets);
+		Iterable<Session> sessions = sessionService.findAll(user);
+		// TODO: Why are sets null??? But not when requested from the SessionController?
+		return SessionResource.from(sessions);
 	}
 
 }

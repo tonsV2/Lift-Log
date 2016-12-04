@@ -22,6 +22,6 @@ public class SessionService implements SessionServiceInterface {
 
 	@Override
 	public Iterable<Session> findAll(User user) {
-		return null;
+		return sessionRepository.findByUser(user);
 	}
 }
