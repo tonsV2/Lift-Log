@@ -4,21 +4,20 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.servlet.*;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Base64;
 
 @Component
-public class AuthenticationTokenFilter implements Filter {
+public class AuthenticationTokenFilter extends OncePerRequestFilter {
 	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-	}
-
-	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 		SecurityContext context = SecurityContextHolder.getContext();
 		if (context.getAuthentication() == null || !context.getAuthentication().isAuthenticated()) {
 			String token = getToken(request);
@@ -30,9 +29,8 @@ public class AuthenticationTokenFilter implements Filter {
 		filterChain.doFilter(request, response);
 	}
 
-	private String getToken(ServletRequest request) {
-		HttpServletRequest httpRequest = (HttpServletRequest) request;
-		String authorization = httpRequest.getHeader("Authorization");
+	private String getToken(HttpServletRequest request) {
+		String authorization = request.getHeader("Authorization");
 		if (authorization != null && authorization.startsWith("Basic ")) {
 			String base64Credentials = authorization.substring("Basic ".length()).trim();
 			String credentials = new String(Base64.getDecoder().decode(base64Credentials), Charset.forName("UTF-8"));
@@ -40,9 +38,5 @@ public class AuthenticationTokenFilter implements Filter {
 			return values[1];
 		}
 		return null;
-	}
-
-	@Override
-	public void destroy() {
 	}
 }
