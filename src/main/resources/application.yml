@@ -5,7 +5,9 @@ spring:
     show-sql: true
     generate-ddl: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
   datasource:
     platform: postgres
     url: jdbc:postgresql://localhost:5432/liftlog

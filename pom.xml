@@ -56,6 +56,11 @@
 			<artifactId>jackson-datatype-jsr310</artifactId>
 			<version>${fasterxml.jackson.datatype.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-csv</artifactId>
+			<version>${fasterxml.jackson.datatype.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.postgresql</groupId>
