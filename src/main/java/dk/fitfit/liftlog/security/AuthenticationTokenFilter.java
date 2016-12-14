@@ -30,9 +30,9 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
 	}
 
 	private String getToken(HttpServletRequest request) {
-		String authorization = request.getHeader("Authorization");
-		if (authorization != null && authorization.startsWith("Basic ")) {
-			String base64Credentials = authorization.substring("Basic ".length()).trim();
+		String header = request.getHeader("Authorization");
+		if (header != null && header.startsWith("Basic ")) {
+			String base64Credentials = header.substring(6);
 			String credentials = new String(Base64.getDecoder().decode(base64Credentials), Charset.forName("UTF-8"));
 			String[] values = credentials.split(":", 2);
 			return values[1];
