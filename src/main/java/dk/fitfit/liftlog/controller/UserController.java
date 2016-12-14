@@ -31,18 +31,12 @@ public class UserController {
 		return principal;
 	}
 
+	//@GetMapping("/users")
 	@RequestMapping("/users")
-	public UserResource user() {
+	public UserResource getUser() {
 		User user = currentUserHolder.getUser();
 		return UserResource.from(user);
 	}
-/*
-	@GetMapping("/users")
-	public Iterable<UserResource> users() {
-		Iterable<User> users = userService.findAll();
-		return mapperService.map(users);
-	}
-*/
 
 	@GetMapping("/users/{id}")
 	public UserResource user(@PathVariable long id) {

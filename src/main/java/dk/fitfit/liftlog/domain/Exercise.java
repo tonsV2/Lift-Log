@@ -7,7 +7,7 @@ import java.util.Set;
 public class Exercise implements DomainObject {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	@Column(unique = true)
 	private String name;
 	@Column(length = 1020)

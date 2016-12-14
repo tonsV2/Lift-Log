@@ -6,7 +6,8 @@ import dk.fitfit.liftlog.security.CurrentUserHolder;
 import dk.fitfit.liftlog.service.MapperService;
 import dk.fitfit.liftlog.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,7 +23,8 @@ public class SessionController {
 		this.sessionService = sessionService;
 	}
 
-	@GetMapping("/sessions")
+//	@GetMapping("/sessions")
+	@RequestMapping(value = "/sessions", method = RequestMethod.GET)
 	public Iterable<SessionResource> getSessions() {
 		Iterable<Session> sessions = sessionService.findAll(currentUserHolder.getUser());
 		return mapperService.map(sessions);
