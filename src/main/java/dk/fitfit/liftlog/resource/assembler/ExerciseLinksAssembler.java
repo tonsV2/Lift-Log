@@ -16,6 +16,7 @@ public class ExerciseLinksAssembler implements ResourceLinksAssemblerInterface<E
 	@Override
 	public List<Link> getLinks(Exercise entity) {
 		List<Link> links = new ArrayList<>();
+		// TODO: Is this "bad" hateoas? Shouldn't self be pointing to the prototype and then the resource should also have a save rel?
 		if (isPrototype(entity)) {
 			links.add(linkTo(methodOn(ExerciseController.class).getExercises()).withSelfRel());
 		} else {
