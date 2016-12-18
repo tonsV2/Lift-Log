@@ -12,15 +12,4 @@ public class LiftLogApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LiftLogApplication.class, args);
 	}
-
-	// Inspiration: https://spring.io/guides/gs/rest-service-cors/
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurerAdapter() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("*");
-			}
-		};
-	}
 }
