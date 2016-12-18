@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-interface ExerciseMapper extends ClassMapper<Exercise, ExerciseResource> {
+public interface ExerciseMapper extends ClassMapper<Exercise, ExerciseResource> {
 	@Override
 	default List<Class<?>> getSupportedClasses() {
 		return Lists.newArrayList(Exercise.class, ExerciseResource.class);
