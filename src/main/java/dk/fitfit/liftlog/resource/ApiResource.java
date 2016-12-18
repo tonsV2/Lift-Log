@@ -11,6 +11,7 @@ public class ApiResource extends ResourceObject {
 	private String version = "0.1";
 
 	public ApiResource() {
+		// TODO: Get these links from a links assembler and assemble this resource in the controller like any other resource... except that there is no input
 		add(linkTo(methodOn(ApiController.class).getApi()).withSelfRel());
 		add(linkTo(methodOn(UserController.class).getUser()).withRel("users"));
 		add(linkTo(methodOn(ExerciseController.class).getExercises()).withRel("exercises"));
