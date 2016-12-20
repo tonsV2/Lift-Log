@@ -5,6 +5,8 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import dk.fitfit.liftlog.service.ConfigurationServiceInterface;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +16,7 @@ import java.util.Collections;
 
 @Component
 public class GoogleAuth {
+	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 	private final ConfigurationServiceInterface configurationService;
 
 	@Autowired
@@ -43,7 +46,7 @@ public class GoogleAuth {
 		try {
 			idToken = verifier.verify(idTokenString);
 		} catch (GeneralSecurityException | IOException e) {
-			e.printStackTrace();
+			LOGGER.info(e.getMessage());
 		}
 		if (idToken == null) {
 			throw new IllegalArgumentException("Bad token...");
