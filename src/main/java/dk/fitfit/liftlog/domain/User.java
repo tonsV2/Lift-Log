@@ -26,6 +26,7 @@ public class User implements DomainObject, UserDetails {
 	@OneToMany(mappedBy = "user")
 	private Set<Session> sessions;
 
+	// Used by hibernate
 	public User() {
 	}
 
@@ -125,5 +126,9 @@ public class User implements DomainObject, UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return enabled;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
 	}
 }
