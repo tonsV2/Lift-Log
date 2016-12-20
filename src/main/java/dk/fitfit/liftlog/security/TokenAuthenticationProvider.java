@@ -27,12 +27,10 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
 		String token = authentication.getCredentials().toString();
 		User user = findUserByToken(token);
 		if (user != null) {
-			authentication = new PreAuthenticatedAuthenticationToken(user, token);
-			authentication.setAuthenticated(true);
+			return new PreAuthenticatedAuthenticationToken(user, token);
 		} else {
 			throw new BadCredentialsException("Invalid token " + token);
 		}
-		return authentication;
 	}
 
 	private User findUserByToken(String token) {
