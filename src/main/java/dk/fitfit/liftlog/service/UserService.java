@@ -49,7 +49,7 @@ public class UserService implements UserServiceInterface {
 		String username = googleAuth.getUsername(token);
 		String email = googleAuth.getEmail(token);
 		User user = findBySub(sub);
-		if(user == null) {
+		if (user == null) {
 			user = create(sub, username, email);
 		}
 		return user;
