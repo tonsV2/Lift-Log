@@ -51,7 +51,7 @@ public class ExerciseAssemblerTest {
 		ResourceContainer<ExerciseResource> resourceContainer = assembler.toResources(exercises);
 
 		// Then
-		// TODO: Somethings wrong here... Even though I implement equals and hashCode on ExerciseResource this still doesn't work
+		// TODO: Somethings wrong here... Even though I implement equals and hashCode on ExerciseResource this still passes
 		exercise1.setName("sdsds");
 		exercise1.setDescription("SDSDSDSDSDS");
 		List<ExerciseResource> content = resourceContainer.getContent();
