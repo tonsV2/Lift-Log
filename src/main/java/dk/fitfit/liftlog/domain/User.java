@@ -13,8 +13,11 @@ public class User implements DomainObject, UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	@Column(unique = true)
 	private String username;
+	@Column(unique = true)
 	private String email;
+	@Column(unique = true)
 	private String sub; // Google identifier
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Authority> authorities;
