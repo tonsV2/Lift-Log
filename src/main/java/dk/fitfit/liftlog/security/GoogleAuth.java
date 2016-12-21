@@ -16,7 +16,7 @@ import java.util.Collections;
 
 @Component
 public class GoogleAuth {
-	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	private final ConfigurationServiceInterface configurationService;
 
 	@Autowired
@@ -46,7 +46,7 @@ public class GoogleAuth {
 		try {
 			idToken = verifier.verify(idTokenString);
 		} catch (GeneralSecurityException | IOException e) {
-			LOGGER.info(e.getMessage());
+			log.debug(e.getMessage());
 		}
 		if (idToken == null) {
 			throw new IllegalArgumentException("Bad token...");
