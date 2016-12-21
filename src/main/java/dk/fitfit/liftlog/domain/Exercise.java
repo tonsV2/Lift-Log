@@ -56,4 +56,6 @@ public class Exercise implements DomainObject {
 	public void setWorkoutSets(Set<WorkoutSet> workoutSets) {
 		this.workoutSets = workoutSets;
 	}
+
+
 }

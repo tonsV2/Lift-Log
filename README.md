@@ -4,6 +4,9 @@ Backend for logging of weight lifting exercises.
 ## Launch application
 ./mvnw spring-boot:run
 
+## Run tests
+SPRING_PROFILES_ACTIVE=test ./mvnw test
+
 # TODO
 ## Ensure all controller methods return proper http status codes
 - This should be done by wrapping all return values in ResponseEntity's
