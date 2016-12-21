@@ -16,6 +16,7 @@ public class Exercise implements DomainObject {
 	private Set<WorkoutSet> workoutSets;
 
 	public Exercise() {
+		// Used by hibernate
 	}
 
 	public Exercise(String name, String description) {

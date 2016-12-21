@@ -26,8 +26,8 @@ public class User implements DomainObject, UserDetails {
 	@OneToMany(mappedBy = "user")
 	private Set<Session> sessions;
 
-	// Used by hibernate
 	public User() {
+		// Used by hibernate
 	}
 
 	public User(String sub, String username, String email) {
