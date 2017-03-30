@@ -6,6 +6,7 @@ import dk.fitfit.liftlog.security.CurrentUserHolder;
 import dk.fitfit.liftlog.service.MapperService;
 import dk.fitfit.liftlog.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,9 +40,9 @@ public class UserController {
 	}
 
 	@GetMapping("/users/{id}")
+	@PreAuthorize("@currentUserHolder.getUser().id.equals(#id)")
 	public UserResource user(@PathVariable long id) {
 		User user = userService.findOne(id);
-// TODO: Assert user is owner or has role admin
 		return mapperService.map(user);
 	}
 }
