@@ -8,7 +8,9 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
 
-@Entity(name = "users") // Postgres doesn't like the table name "user"
+@Entity //(name = "users") // Postgres doesn't like the table name "user"
+// @Table doesn't alter hql, with @Entity... Select * from users;
+@Table(name = "users")
 public class User implements DomainObject, UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
