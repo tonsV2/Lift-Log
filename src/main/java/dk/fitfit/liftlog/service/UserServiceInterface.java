@@ -4,6 +4,7 @@ import dk.fitfit.liftlog.domain.User;
 
 public interface UserServiceInterface {
 	User findOne(long id);
+	Iterable<User> findAll();
 	User save(User user);
 	void delete(User user);
 	User findBySub(String sub);

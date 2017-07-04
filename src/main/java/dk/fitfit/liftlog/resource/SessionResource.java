@@ -1,14 +1,14 @@
 package dk.fitfit.liftlog.resource;
 
+import com.google.common.collect.Streams;
 import dk.fitfit.liftlog.domain.Session;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.Collectors;
 
 public class SessionResource extends ResourceObject {
 	private LocalDateTime timestamp = LocalDateTime.now();
-	private List<WorkoutSetResource> sets;
+	private Iterable<WorkoutSetResource> sets;
 
 	public SessionResource() {
 	}
@@ -22,13 +22,10 @@ public class SessionResource extends ResourceObject {
 		return new SessionResource(session);
 	}
 
-	public static List<SessionResource> from(Iterable<Session> sessions) {
-		List<SessionResource> resources = new ArrayList<>();
-		for (Session session : sessions) {
-			SessionResource resource = SessionResource.from(session);
-			resources.add(resource);
-		}
-		return resources;
+	public static Iterable<SessionResource> from(Iterable<Session> sessions) {
+		return Streams.stream(sessions)
+				.map(SessionResource::from)
+				.collect(Collectors.toList());
 	}
 
 	public LocalDateTime getTimestamp() {
@@ -39,11 +36,11 @@ public class SessionResource extends ResourceObject {
 		this.timestamp = timestamp;
 	}
 
-	public List<WorkoutSetResource> getSets() {
+	public Iterable<WorkoutSetResource> getSets() {
 		return sets;
 	}
 
-	public void setSets(List<WorkoutSetResource> sets) {
+	public void setSets(Iterable<WorkoutSetResource> sets) {
 		this.sets = sets;
 	}
 }

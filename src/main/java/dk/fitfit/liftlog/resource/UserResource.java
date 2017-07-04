@@ -1,10 +1,14 @@
 package dk.fitfit.liftlog.resource;
 
+import com.google.common.collect.Streams;
 import dk.fitfit.liftlog.domain.User;
+
+import java.util.stream.Collectors;
 
 public class UserResource extends ResourceObject {
 	private String username;
 	private String email;
+	private String sub;
 
 	public UserResource() {
 	}
@@ -12,10 +16,17 @@ public class UserResource extends ResourceObject {
 	private UserResource(User user) {
 		this.username = user.getUsername();
 		this.email = user.getEmail();
+		this.sub = user.getSub();
 	}
 
 	public static UserResource from(User user) {
 		return new UserResource(user);
+	}
+
+	public static Iterable<UserResource> from(Iterable<User> users) {
+        return Streams.stream(users)
+				.map(UserResource::from)
+				.collect(Collectors.toList());
 	}
 
 	public String getUsername() {
@@ -32,5 +43,13 @@ public class UserResource extends ResourceObject {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getSub() {
+		return sub;
+	}
+
+	public void setSub(String sub) {
+		this.sub = sub;
 	}
 }

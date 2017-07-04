@@ -5,13 +5,15 @@ import dk.fitfit.liftlog.domain.Session;
 import dk.fitfit.liftlog.domain.User;
 import dk.fitfit.liftlog.resource.SessionResource;
 import dk.fitfit.liftlog.security.CurrentUserHolder;
-import dk.fitfit.liftlog.service.*;
+import dk.fitfit.liftlog.service.ExerciseServiceInterface;
+import dk.fitfit.liftlog.service.SessionServiceInterface;
+import dk.fitfit.liftlog.service.UserServiceInterface;
+import dk.fitfit.liftlog.service.WorkoutSetServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @RestController
 public class InitController {
@@ -22,7 +24,7 @@ public class InitController {
 	private final UserServiceInterface userService;
 
 	@Autowired
-	public InitController(CurrentUserHolder currentUserHolder, MapperService mapperService, WorkoutSetServiceInterface workoutSetService, ExerciseServiceInterface exerciseService, SessionServiceInterface sessionService, UserServiceInterface userService) {
+	public InitController(CurrentUserHolder currentUserHolder, WorkoutSetServiceInterface workoutSetService, ExerciseServiceInterface exerciseService, SessionServiceInterface sessionService, UserServiceInterface userService) {
 		this.currentUserHolder = currentUserHolder;
 		this.workoutSetService = workoutSetService;
 		this.exerciseService = exerciseService;
@@ -31,7 +33,7 @@ public class InitController {
 	}
 
 	@GetMapping("/init")
-	public List<SessionResource> init() {
+	public Iterable<SessionResource> init() {
 		User user1 = new User("106124068689044163331", "Sebastian Greatful", "sebastianthegreatful@gmail.com");
 		userService.save(user1);
 		User user2 = new User("107870462775623347777", "Thomas Schaer", "thomasmschaer@gmail.com");

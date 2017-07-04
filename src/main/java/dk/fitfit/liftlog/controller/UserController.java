@@ -28,12 +28,20 @@ public class UserController {
 	}
 
 	@RequestMapping("/users/principal")
-	public Principal user(Principal principal) {
+	public Principal getPrincipal(Principal principal) {
 		return principal;
 	}
-
-	//@GetMapping("/users")
+/*
 	@RequestMapping("/users")
+    @PostFilter("@currentUserHolder.getUser().sub == filterObject.sub")
+	public Iterable<UserResource> users() {
+        Iterable<User> users = userService.findAll();
+        return UserResource.from(users);
+	}
+*/
+//	@PreAuthorize("hasRole('USER')")
+	//@GetMapping("/users")
+	@RequestMapping("/users/current")
 	public UserResource getUser() {
 		User user = currentUserHolder.getUser();
 		return UserResource.from(user);

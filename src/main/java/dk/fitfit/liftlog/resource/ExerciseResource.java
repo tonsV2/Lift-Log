@@ -1,9 +1,9 @@
 package dk.fitfit.liftlog.resource;
 
+import com.google.common.collect.Streams;
 import dk.fitfit.liftlog.domain.Exercise;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.Collectors;
 
 public class ExerciseResource extends ResourceObject {
 	private String name;
@@ -22,11 +22,9 @@ public class ExerciseResource extends ResourceObject {
 	}
 
 	public static Iterable<ExerciseResource> from(Iterable<Exercise> exercises) {
-		List<ExerciseResource> resources = new ArrayList<>();
-		for (Exercise exercise : exercises) {
-			resources.add(ExerciseResource.from(exercise));
-		}
-		return resources;
+		return Streams.stream(exercises)
+				.map(ExerciseResource::from)
+				.collect(Collectors.toList());
 	}
 
 	public String getName() {

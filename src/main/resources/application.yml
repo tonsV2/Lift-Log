@@ -33,7 +33,7 @@ spring:
 
   datasource:
     platform: h2
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL   # TODO: Is there a point? No pg specific features are or should be used anyway
     username: sa
     password: ""
     driverClassName: org.h2.Driver

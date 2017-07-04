@@ -1,5 +1,6 @@
 package dk.fitfit.liftlog.resource.assembler;
 
+import com.google.common.collect.Streams;
 import dk.fitfit.liftlog.domain.Exercise;
 import dk.fitfit.liftlog.resource.ExerciseResource;
 import dk.fitfit.liftlog.resource.ResourceContainer;
@@ -8,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class ExerciseAssembler {
@@ -31,12 +32,9 @@ public class ExerciseAssembler {
 	}
 
 	public ResourceContainer<ExerciseResource> toResources(Iterable<Exercise> exercises) {
-		List<ExerciseResource> resources = new ArrayList<>();
-		for (Exercise exercise : exercises) {
-			resources.add(toResource(exercise));
-		}
-		ResourceContainer<ExerciseResource> container = new ResourceContainer<>(resources);
-		container.add(linksAssembler.getContainerLinks());
-		return container;
+		List<ExerciseResource> resources = Streams.stream(exercises)
+				.map(this::toResource)
+				.collect(Collectors.toList());
+		return new ResourceContainer<>(resources, linksAssembler.getContainerLinks());
 	}
 }

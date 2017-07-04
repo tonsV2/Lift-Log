@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {UserMapper.class, ExerciseMapper.class})
+@Mapper(componentModel = "spring", uses = {UserMapper.class, ExerciseMapper.class, SessionMapper.class})
 interface WorkoutSetMapper extends ClassMapper<WorkoutSet, WorkoutSetResource> {
 	@Override
 	default List<Class<?>> getSupportedClasses() {
